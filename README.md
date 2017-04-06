@@ -1,7 +1,7 @@
-###python调用darknet中的函数
-####首先需要把darknet源码制作为一个.so文件
+### python调用darknet中的函数
+#### 首先需要把darknet源码制作为一个.so文件
 直接编写Makefile或者用cmake都可以实现这个功能
-#####Makefile
+##### Makefile
 Makefile是作者代码中原生提供的，但是只能编译为可执行文件。我在原生Makefile中的改动：
 ```
 CFLAGS=-Wall -Wfatal-errors -fPIC
@@ -11,7 +11,7 @@ $(CC) $(COMMON) $(CFLAGS) -shared $^ -o $@ $(LDFLAGS)
 - CFLAGS中不要加-g参数，否则会去找cvRound等用不着的老版opencv函数。至于如果debug，我还在探索中...
 - 生成库之后先用file命令查看一下是否是 shared object
 - 同样，如何需要生成可执行文件也用file查看一下是否是 executable, 因为linux不是以后缀判断文件类型的。如果非要./shared-object的话，连main函数都进入不了就会segmentation fault。
-#####cmake
+##### cmake
 因为Makefile的代码比较多，而且内容不易懂，所以我中间尝试选择cmake来编译动态库。贴上CMakeLists.txt:
 ```
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.3)
